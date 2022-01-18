@@ -1,0 +1,193 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+
+struct node
+{
+	int data;
+	struct node* link;
+};
+
+struct node* head=NULL;
+
+
+
+
+
+void display()
+{
+	struct node* temp=head;
+	while(temp!=NULL)
+	{
+		printf("%d ",temp->data);
+		temp=temp->link;
+	}
+	printf("\n");
+}
+
+
+void add_end(int data)
+{
+	struct node* temp=head;
+	struct node* newnode=(struct node*)malloc(sizeof(struct node));
+	
+	newnode->data=data;
+	
+	newnode->link=NULL;
+	
+	if(temp!=NULL)
+	{
+		while(temp->link!=NULL)
+		{
+			temp=temp->link;
+		}
+		temp->link=newnode;
+
+	}else
+	{	
+		
+		head=newnode;
+	}
+	
+	
+}
+
+
+void add_beg(int data)
+{
+	struct node* newnode=(struct node*)malloc(sizeof(struct node));
+	newnode->data=data;
+	newnode->link=head;
+	head=newnode;
+}
+
+void add_pos(int data,int pos)
+{
+	struct node* temp=head;
+	struct node* newnode=(struct node*)malloc(sizeof(struct node));
+	newnode->data=data;
+
+	if(pos>1)
+	{
+		while(--pos>1 && temp!=NULL)
+		{
+			temp=temp->link;
+		}
+
+		newnode->link=temp->link;
+		temp->link=newnode;
+	}else
+	{
+		add_beg(data);	
+	}
+
+
+}
+
+void del_beg()
+{
+	if(head!=NULL)
+	{
+		head=head->link;
+		
+	}else
+	{
+		printf("Linkd List is empty\n");
+	}
+}
+
+int del_end()
+{
+	struct node* temp=head;
+	int val=-1;
+	if(temp==NULL)
+	{
+		printf("The Linked List is empty\n");
+	}else
+	{
+		if(head->link!=NULL)
+		{
+			while(temp->link->link!=NULL)
+			{
+				temp=temp->link;
+			}
+			val=temp->link->data;
+			temp->link=NULL;
+
+		}else
+		{
+			val=head->data;
+			head=NULL;
+		}
+	}
+	return val;
+}
+
+
+void del_pos(int pos)
+{
+	struct node* temp=head;
+
+	if(pos>1)
+	{	
+		
+		while(--pos>1 && temp!=NULL)
+		{
+			temp=temp->link;
+		}
+		
+		temp->link=temp->link->link;
+
+		
+	}else
+	{
+		del_beg();
+	}
+}
+
+
+int main()
+{
+	
+	
+	
+	while(1)
+	{	
+			
+
+
+		int choice;
+		printf("1.Push\n2.Pop\n3.Exit\n");
+		scanf("%d",&choice);
+		switch(choice)
+		{
+			
+
+			case 1:
+			{
+				int temp;
+				printf("Enter the value to push");
+				scanf("%d",&temp);
+				add_end(temp);
+				display();
+				break;
+
+			}
+			case 2:
+			{
+				int temp=del_end();
+				if(temp!=-1)
+				{
+					printf("%d Deleted\n",temp);
+				}
+				display();
+				break;
+			}
+			case 3:
+			{	
+				return 0;
+			}
+		}	
+	}
+	return 0;
+}

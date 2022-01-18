@@ -41,9 +41,9 @@ int pop()
 
 int main()
 {	
-	char in_ep_r[]="x+y*z/w+u";
+	char in_ep_r[]="(A-B/C)*(A/K-L)";
 
-	int length=9;
+	int length=15;
 	int x;
 	char in_ep[100];
 
@@ -51,12 +51,30 @@ int main()
 	int pre_index=0;
 	
 	for(int i=0;i<length;++i)
-	{
-		in_ep[i]=in_ep_r[length-i-1];
+	{	
+		// printf("%c",in_ep_r[length-i-1]);
+		if(in_ep_r[length-i-1]=='(')
+		{
+			in_ep[i]=')';
+		}else if(in_ep_r[length-i-1]==')')
+		{	
+			// printf("came here");
+			in_ep[i]='(';
+		}else
+		{
+			in_ep[i]=in_ep_r[length-i-1];
+		}
 	}// The program upto reversing the string is correct
+
+	// for(int i=0;i<length;++i)
+	// {
+	// 	printf("%c",in_ep[i]);
+	// }
+	// printf("End");
 
 	for(int i=0;i<length;++i)
 	{	
+		// printf("%c",in_ep[i]);
 
 		if((int)in_ep[i]>=97 && (int)in_ep[i]<=122)
 		{
