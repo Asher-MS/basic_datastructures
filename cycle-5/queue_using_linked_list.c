@@ -144,8 +144,6 @@ void del_pos(int pos)
 		del_beg();
 	}
 }
-
-
 int main()
 {
 	
@@ -157,34 +155,32 @@ int main()
 
 
 		int choice;
-		printf("1.Push\n2.Pop\n3.Exit\n");
+		printf("1.Enqueue\n2.Dequeue\n3.Exit\n");
 		scanf("%d",&choice);
 		switch(choice)
 		{
 			
-
 			case 1:
 			{
 				int temp;
-				printf("Enter the value to push");
+				printf("Enter the number to enqueue");
 				scanf("%d",&temp);
-				add_end(temp);
+				add_beg(temp);
 				display();
 				break;
-
 			}
 			case 2:
 			{
 				int temp=del_end();
 				if(temp!=-1)
 				{
-					printf("%d Popped\n",temp);
+					printf("%d Dequeued\n",temp);
 				}
 				display();
 				break;
 			}
 			case 3:
-			{	
+			{
 				return 0;
 			}
 		}	
