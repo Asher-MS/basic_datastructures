@@ -56,33 +56,15 @@ void display()
 	printf("\n");
 }
 
-
-
-
-
-
-
-
-
-
-
 int main()
 {
-	
-	
-	
 	while(1)
 	{	
-			
-
-
 		int choice;
 		printf("1.Push\n2.Pop\n3.Exit\n");
 		scanf("%d",&choice);
 		switch(choice)
 		{
-			
-
 			case 1:
 			{
 				int temp;
