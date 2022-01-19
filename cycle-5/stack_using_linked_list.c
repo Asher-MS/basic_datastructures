@@ -8,15 +8,46 @@ struct node
 	struct node* link;
 };
 
-struct node* head=NULL;
+
+struct node* top=NULL;
 
 
+void push(int data)
+{
+	struct node* temp=top;
+	struct node* newnode=(struct node*)malloc(sizeof(struct node));
+	newnode->data=data;
+	newnode->link=NULL;
+	if(top==NULL)
+	{
+		top=newnode;
+	}else
+	{
+		newnode->link=top;
+		top=newnode;
+	}
+	
+	
+}
 
+int pop()
+{
+	if(top==NULL)
+	{
+		printf("Stack is empty");
+		return -1;
+	}else
+	{
+		int val=top->data;
+		top=top->link;
+		return val;
+	}
+}
 
 
 void display()
 {
-	struct node* temp=head;
+	struct node* temp=top;
 	while(temp!=NULL)
 	{
 		printf("%d ",temp->data);
@@ -26,124 +57,13 @@ void display()
 }
 
 
-void add_end(int data)
-{
-	struct node* temp=head;
-	struct node* newnode=(struct node*)malloc(sizeof(struct node));
-	
-	newnode->data=data;
-	
-	newnode->link=NULL;
-	
-	if(temp!=NULL)
-	{
-		while(temp->link!=NULL)
-		{
-			temp=temp->link;
-		}
-		temp->link=newnode;
-
-	}else
-	{	
-		
-		head=newnode;
-	}
-	
-	
-}
 
 
-void add_beg(int data)
-{
-	struct node* newnode=(struct node*)malloc(sizeof(struct node));
-	newnode->data=data;
-	newnode->link=head;
-	head=newnode;
-}
-
-void add_pos(int data,int pos)
-{
-	struct node* temp=head;
-	struct node* newnode=(struct node*)malloc(sizeof(struct node));
-	newnode->data=data;
-
-	if(pos>1)
-	{
-		while(--pos>1 && temp!=NULL)
-		{
-			temp=temp->link;
-		}
-
-		newnode->link=temp->link;
-		temp->link=newnode;
-	}else
-	{
-		add_beg(data);	
-	}
 
 
-}
-
-void del_beg()
-{
-	if(head!=NULL)
-	{
-		head=head->link;
-		
-	}else
-	{
-		printf("Linkd List is empty\n");
-	}
-}
-
-int del_end()
-{
-	struct node* temp=head;
-	int val=-1;
-	if(temp==NULL)
-	{
-		printf("The Linked List is empty\n");
-	}else
-	{
-		if(head->link!=NULL)
-		{
-			while(temp->link->link!=NULL)
-			{
-				temp=temp->link;
-			}
-			val=temp->link->data;
-			temp->link=NULL;
-
-		}else
-		{
-			val=head->data;
-			head=NULL;
-		}
-	}
-	return val;
-}
 
 
-void del_pos(int pos)
-{
-	struct node* temp=head;
 
-	if(pos>1)
-	{	
-		
-		while(--pos>1 && temp!=NULL)
-		{
-			temp=temp->link;
-		}
-		
-		temp->link=temp->link->link;
-
-		
-	}else
-	{
-		del_beg();
-	}
-}
 
 
 int main()
@@ -168,14 +88,15 @@ int main()
 				int temp;
 				printf("Enter the value to push");
 				scanf("%d",&temp);
-				add_end(temp);
+				// add_end(temp);
+				push(temp);
 				display();
 				break;
 
 			}
 			case 2:
 			{
-				int temp=del_end();
+				int temp=pop();
 				if(temp!=-1)
 				{
 					printf("%d Popped\n",temp);

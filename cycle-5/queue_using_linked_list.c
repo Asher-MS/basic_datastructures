@@ -8,7 +8,7 @@ struct node
 	struct node* link;
 };
 
-struct node* head=NULL;
+struct node* top=NULL;
 
 
 
@@ -26,31 +26,6 @@ void display()
 }
 
 
-void add_end(int data)
-{
-	struct node* temp=head;
-	struct node* newnode=(struct node*)malloc(sizeof(struct node));
-	
-	newnode->data=data;
-	
-	newnode->link=NULL;
-	
-	if(temp!=NULL)
-	{
-		while(temp->link!=NULL)
-		{
-			temp=temp->link;
-		}
-		temp->link=newnode;
-
-	}else
-	{	
-		
-		head=newnode;
-	}
-	
-	
-}
 
 
 void add_beg(int data)
@@ -58,51 +33,20 @@ void add_beg(int data)
 	struct node* newnode=(struct node*)malloc(sizeof(struct node));
 	newnode->data=data;
 	newnode->link=head;
-	head=newnode;
+	top=newnode;
 }
 
-void add_pos(int data,int pos)
+
+
+
+
+int pop()
 {
-	struct node* temp=head;
-	struct node* newnode=(struct node*)malloc(sizeof(struct node));
-	newnode->data=data;
-
-	if(pos>1)
-	{
-		while(--pos>1 && temp!=NULL)
-		{
-			temp=temp->link;
-		}
-
-		newnode->link=temp->link;
-		temp->link=newnode;
-	}else
-	{
-		add_beg(data);	
-	}
-
-
-}
-
-void del_beg()
-{
-	if(head!=NULL)
-	{
-		head=head->link;
-		
-	}else
-	{
-		printf("Linkd List is empty\n");
-	}
-}
-
-int del_end()
-{
-	struct node* temp=head;
+	struct node* temp=top;
 	int val=-1;
 	if(temp==NULL)
 	{
-		printf("The Linked List is empty\n");
+		printf("The Queue is empty\n");
 	}else
 	{
 		if(head->link!=NULL)
@@ -124,26 +68,7 @@ int del_end()
 }
 
 
-void del_pos(int pos)
-{
-	struct node* temp=head;
 
-	if(pos>1)
-	{	
-		
-		while(--pos>1 && temp!=NULL)
-		{
-			temp=temp->link;
-		}
-		
-		temp->link=temp->link->link;
-
-		
-	}else
-	{
-		del_beg();
-	}
-}
 int main()
 {
 	
