@@ -8,15 +8,16 @@ struct node
 	struct node* link;
 };
 
-struct node* head=NULL;
-struct node* stack_head=NULL;
+struct node* top=NULL;
+struct node* front=NULL;
+struct node* rear=NULL;
 
 
 
 
 void display()
 {
-	struct node* temp=head;
+	struct node* temp=front;
 	while(temp!=NULL)
 	{
 		printf("%d ",temp->data);
@@ -28,44 +29,36 @@ void display()
 
 
 
-
-void add_beg(int data)
+void enqueue(int data)
 {
 	struct node* newnode=(struct node*)malloc(sizeof(struct node));
 	newnode->data=data;
-	newnode->link=head;
-	head=newnode;
+	newnode->link=NULL;
+	if(front==NULL || rear==NULL)
+	{
+		front=rear=newnode;
+	}else
+	{
+		rear->link=newnode;
+		rear=newnode;
+	}
 }
 
 
 
 
-
-int del_end()
+int dequeue()
 {
-	struct node* temp=head;
-	int val=-1;
-	if(temp==NULL)
+	if(front==NULL || rear==NULL)
 	{
-		printf("The Queue is empty\n");
+		printf("Queue is empty");
+		return -1;
 	}else
 	{
-		if(head->link!=NULL)
-		{
-			while(temp->link->link!=NULL)
-			{
-				temp=temp->link;
-			}
-			val=temp->link->data;
-			temp->link=NULL;
-
-		}else
-		{
-			val=head->data;
-			head=NULL;
-		}
+		int val=front->data;
+		front=front->link;
+		return val;
 	}
-	return val;
 }
 
 
@@ -73,67 +66,49 @@ int del_end()
 
 void push(int data)
 {
-	struct node* temp=stack_head;
+	struct node* temp=top;
 	struct node* newnode=(struct node*)malloc(sizeof(struct node));
-	
 	newnode->data=data;
-	
 	newnode->link=NULL;
-	
-	if(temp!=NULL)
+	if(top==NULL)
 	{
-		while(temp->link!=NULL)
-		{
-			temp=temp->link;
-		}
-		temp->link=newnode;
-
+		top=newnode;
 	}else
-	{	
-		
-		stack_head=newnode;
+	{
+		newnode->link=top;
+		top=newnode;
 	}
+	
+	
 }
 
 int pop()
 {
-	struct node* temp=stack_head;
-	int val=-1;
-	if(temp==NULL)
+	if(top==NULL)
 	{
-		printf("The Stack is empty\n");
+		printf("Stack is empty");
+		return -1;
 	}else
 	{
-		if(stack_head->link!=NULL)
-		{
-			while(temp->link->link!=NULL)
-			{
-				temp=temp->link;
-			}
-			val=temp->link->data;
-			temp->link=NULL;
-
-		}else
-		{
-			val=stack_head->data;
-			stack_head=NULL;
-		}
+		int val=top->data;
+		top=top->link;
+		return val;
 	}
-	return val;
 }
+
 
 void reverse()
 {	
 	printf("Reversed Queue  ");
-	while(head!=NULL)
+	while(front!=NULL)
 	{
-		push(del_end());
+		push(dequeue());
 
 	}
 	
-	while(stack_head!=NULL)
+	while(top!=NULL)
 	{
-		add_beg(pop());
+		enqueue(pop());
 	}
 	display();
 	printf("\n");
@@ -159,13 +134,13 @@ int main()
 				int temp;
 				printf("Enter the number to enqueue");
 				scanf("%d",&temp);
-				add_beg(temp);
+				enqueue(temp);
 				display();
 				break;
 			}
 			case 2:
 			{
-				int temp=del_end();
+				int temp=dequeue();
 				if(temp!=-1)
 				{
 					printf("%d Dequeued\n",temp);

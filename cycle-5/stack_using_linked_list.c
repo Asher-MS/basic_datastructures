@@ -46,7 +46,8 @@ int pop()
 
 
 void display()
-{
+{	
+	printf("STACK : ");
 	struct node* temp=top;
 	while(temp!=NULL)
 	{
