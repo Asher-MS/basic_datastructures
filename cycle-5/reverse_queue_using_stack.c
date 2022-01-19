@@ -102,11 +102,11 @@ int pop()
 void reverse()
 {	
 	printf("Reversed Queue  ");
-	while(front!=rear)
-	{
-		// push(del_end());
-		push(del_beg());
-	}
+	// while(front!=rear)
+	// {
+	// 	// push(del_end());
+	// 	push(del_beg());
+	// }
 	
 	while(top!=NULL)
 	{
@@ -116,10 +116,8 @@ void reverse()
 	printf("\n");
 }
 
-int main()
-{	
-	while(1)
-	{	
+int main(){	
+	while(1){	
 		int choice;
 		printf("1.Enqueue\n2.Dequeue\n3.reverse\n4.Exit\n");
 		scanf("%d",&choice);
@@ -142,6 +140,7 @@ int main()
 				if(temp!=-1)
 				{
 					printf("%d Dequeued\n",temp);
+					push(temp);
 				}
 				display();
 				break;
