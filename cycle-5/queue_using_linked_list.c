@@ -1,16 +1,16 @@
-#include<stdio.h>
-#include<stdlib.h>
-
+#include <stdio.h>
+#include <stdlib.h>
 
 struct node
 {
 	int data;
-	struct node* link;
+	struct node *link;
 };
 
+
 struct node* head=NULL;
-<<<<<<< HEAD
-=======
+
+
 struct node* front=NULL;
 struct node* rear=NULL;
 
@@ -118,12 +118,15 @@ struct node
 };
 
 struct node* top=NULL;
->>>>>>> 42a17a082719c8bafa3ec77157ce6bf8d707f493
+
 
 
 struct node* front=NULL;
 struct node* rear=NULL;
 
+
+struct node *front = NULL;
+struct node *rear = NULL;
 
 // void display()
 // {
@@ -136,32 +139,33 @@ struct node* rear=NULL;
 // 	printf("\n");
 // }
 
-
 void enqueue(int data)
 {
-	struct node* newnode=(struct node*)malloc(sizeof(struct node));
-	newnode->data=data;
-	newnode->link=NULL;
-	if(front==NULL || rear==NULL)
+	struct node *newnode = (struct node *)malloc(sizeof(struct node));
+	newnode->data = data;
+	newnode->link = NULL;
+	if (front == NULL || rear == NULL)
 	{
-		front=rear=newnode;
-	}else
+		front = rear = newnode;
+	}
+	else
 	{
-		rear->link=newnode;
-		rear=newnode;
+		rear->link = newnode;
+		rear = newnode;
 	}
 }
 
 int dequeue()
 {
-	if(front==NULL || rear==NULL)
+	if (front == NULL || rear == NULL)
 	{
 		printf("Queue is empty");
 		return -1;
-	}else
+	}
+	else
 	{
-		int val=front->data;
-		front=front->link;
+		int val = front->data;
+		front = front->link;
 		return val;
 	}
 }
@@ -169,11 +173,11 @@ int dequeue()
 void display()
 {
 	printf("QUEUE:\n");
-	struct node* temp=front;
-	while(temp!=NULL)
+	struct node *temp = front;
+	while (temp != NULL)
 	{
-		printf("%d ",temp->data);
-		temp=temp->link;
+		printf("%d ", temp->data);
+		temp = temp->link;
 	}
 	printf("\n");
 }
@@ -185,10 +189,6 @@ void display()
 // 	newnode->link=head;
 // 	head=newnode;
 // }
-
-
-
-
 
 // int dequeue()
 // {
@@ -217,48 +217,42 @@ void display()
 // 	return val;
 // }
 
-
-
 int main()
 {
-	
-	
-	
-	while(1)
-	{	
-			
 
+	while (1)
+	{
 
 		int choice;
 		printf("1.Enqueue\n2.Dequeue\n3.Exit\n");
-		scanf("%d",&choice);
-		switch(choice)
+		scanf("%d", &choice);
+		switch (choice)
 		{
-			
-			case 1:
+
+		case 1:
+		{
+			int temp;
+			printf("Enter the number to enqueue");
+			scanf("%d", &temp);
+			enqueue(temp);
+			display();
+			break;
+		}
+		case 2:
+		{
+			int temp = dequeue();
+			if (temp != -1)
 			{
-				int temp;
-				printf("Enter the number to enqueue");
-				scanf("%d",&temp);
-				enqueue(temp);
-				display();
-				break;
+				printf("%d Dequeued\n", temp);
 			}
-			case 2:
-			{
-				int temp=dequeue();
-				if(temp!=-1)
-				{
-					printf("%d Dequeued\n",temp);
-				}
-				display();
-				break;
-			}
-			case 3:
-			{
-				return 0;
-			}
-		}	
+			display();
+			break;
+		}
+		case 3:
+		{
+			return 0;
+		}
+		}
 	}
 	return 0;
 }
