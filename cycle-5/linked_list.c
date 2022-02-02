@@ -7,7 +7,21 @@ struct node
 	struct node *link;
 };
 
-struct node *head = NULL;
+
+struct node* head=NULL;
+
+
+int len(){
+	struct node* temp=head;
+	int length=0;
+	while(temp!=NULL)
+	{
+		length++;
+		temp=temp->link;
+	}
+	return length;
+}
+
 
 int length()
 {
@@ -70,15 +84,15 @@ void add_pos(int data, int pos)
 	struct node *newnode = (struct node *)malloc(sizeof(struct node));
 	newnode->data = data;
 
-	if (pos > length() || pos < 1)
-	{
-		printf("Invalid Position\n");
+
+	if(pos<=0 || pos>len(head)){
+		printf("Invalid position \n");
 	}
-	if (pos > 1)
+	else if(pos>1)
 	{
-		while (--pos > 1 && temp != NULL)
-		{
-			temp = temp->link;
+		while(--pos>1 && temp->link!=NULL){
+			temp=temp->link;
+
 		}
 
 		newnode->link = temp->link;
@@ -136,7 +150,15 @@ void del_pos(int pos)
 	if (pos > 1)
 	{
 
-		while (--pos > 1 && temp != NULL)
+
+	if(pos<=0 || pos>len(head)){
+		printf("Invalid position \n");
+	}
+	else if(pos>1)
+	{	
+		
+		while(--pos>1 && temp!=NULL)
+
 		{
 			temp = temp->link;
 		}
@@ -155,9 +177,11 @@ int main()
 	{
 
 		int choice;
-		printf("1.Display\n2.Insert at End\n3.Insert at Beginning\n4.Delete from beginning\n5.Delete from end\n6.Insert into position\n7.Delete from position\n8.Exit");
-		scanf("%d", &choice);
-		switch (choice)
+
+		printf("1.Display\n2.Insert at End\n3.Insert at Beginning\n4.Delete from beginning\n5.Delete from end\n6.Insert into position\n7.Delete from position\n8.Exit\n");
+		scanf("%d",&choice);
+		switch(choice)
+
 		{
 		case 1:
 		{

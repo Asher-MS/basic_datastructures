@@ -56,14 +56,24 @@ void display()
 int main()
 {
 
-	while (1)
-	{
+	while(1)
+	{	
 
 		int choice;
 		printf("1.Push\n2.Pop\n3.Exit\n");
 		scanf("%d", &choice);
 		switch (choice)
 		{
+
+			case 1:
+			{
+				int temp;
+				printf("Enter the value to push");
+				scanf("%d",&temp);
+				// add_end(temp);
+				push(temp);
+				display();
+				break;
 
 		case 1:
 		{
